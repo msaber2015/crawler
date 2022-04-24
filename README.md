@@ -10,4 +10,4 @@
 - send Get Request to http://localhost:8080/map?url=https://monzo.com
 - you can change value of url parameter
 
-# Crwaler will take time to crawl all links in given page s Please wait and Track The logs
+# Crawler will take time to crawl all links in given page so Please wait and Track The logs
