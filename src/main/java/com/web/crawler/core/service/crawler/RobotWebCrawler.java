@@ -36,7 +36,7 @@ public class RobotWebCrawler implements WebCrawler {
         // visit pages of unvisited stack
         while (!unvisitedPages.empty()) {
             currentPage = unvisitedPages.pop();
-            System.out.println("CurrentPage :- "+currentPage);
+            System.out.println("CurrentPage :- " + currentPage);
             if (!visitedLinks.contains(currentPage)) {
 
                 // Add Url to set to not visit it again
@@ -44,8 +44,8 @@ public class RobotWebCrawler implements WebCrawler {
                 // Get Urls in current page
                 links = findLinks(currentPage, domain);
                 // Add New Urls to unvisited list to visit them again
-                links.forEach((e)->{
-                    if(!unvisitedPages.contains(e) && !visitedLinks.contains(e)){
+                links.forEach((e) -> {
+                    if (!unvisitedPages.contains(e) && !visitedLinks.contains(e)) {
                         unvisitedPages.add(e);
                     }
                 });
@@ -82,14 +82,14 @@ public class RobotWebCrawler implements WebCrawler {
                 }
                 if (currentLink.startsWith("http") && currentLink.startsWith(domain)
                         && !currentLink.contains(".png") && !currentLink.contains(".pdf")) {
-                    if(currentLink.substring(currentLink.length()-1,currentLink.length()).equals("/")){
-                        currentLink=currentLink.substring(0,currentLink.length()-1);
+                    if (currentLink.substring(currentLink.length() - 1, currentLink.length()).equals("/")) {
+                        currentLink = currentLink.substring(0, currentLink.length() - 1);
                     }
                     links.add(currentLink);
                 }
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
 
@@ -97,20 +97,20 @@ public class RobotWebCrawler implements WebCrawler {
     }
 
     // Add SiteMap set in json file
-    private void createJsonFileWithSiteMap(SiteMapVO siteMapVO){
+    private void createJsonFileWithSiteMap(SiteMapVO siteMapVO) {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writeValue(new File("siteMap.json"), siteMapVO);
             System.out.println("Site Map File Created Successfully In The same Path With Name :- siteMap.json");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
 
     }
 
     @PostConstruct
-    public void runCrawler(){
+    public void runCrawler() {
         generateSiteMap(testRootSiteUrl);
     }
 
